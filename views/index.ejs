@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!---Coding By CodingLab | www.codinglabweb.com--->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>myapp</title>
+    <!---Custom CSS File--->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header id="headertag">Employee Details</header>
+    <section class="container">
+      <div id="tablecontainer">
+        <button id="addButton" class="Add-list">Add</button>
+        <div class="searchBar">
+          <img
+            src="https://png.pngtree.com/png-vector/20190115/ourmid/pngtree-vector-search-icon-png-image_320926.jpg"
+            alt="Search"
+          />
+          <input
+            type="search"
+            id="searchBar"
+            onkeyup="searchBar()"
+            placeholder="Search.."
+          />
+        </div>
+        <table border="1" id="employeeTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Dob</th>
+              <!-- <th>Branch Name</th>
+                <th>Branch Address</th> -->
+              <th>Designation</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% function formatDateForInput(dateString) {
+                const date = new Date(dateString);
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${ year}-${month}-${day}`;
+            } items.forEach(function(item) { %>
+            <tr data-id="<%= item.id %>">
+              <td class="name"><%= item.first_name %></td>
+              <td class="email"><%= item.email %></td>
+              <!-- <td class="br_name"><%= item.br_name %></td>
+                        <td class="addr"><%= item.addr %></td> -->
+              <td class="phone"><%= item.phone %></td>
+              <td class="dob" data-dob="<%= formatDateForInput(item.dob) %>">
+                <%= formatDateForInput(item.dob) %>
+              </td>
+              <td class="designation"><%= item.designation %></td>
+              <td class="salary"><%= item.salary %></td>
+              <td>
+                <div class="dropdown">
+                  <button class="dropbtn">...</button>
+                  <div class="dropdown-content">
+                    <button onclick="editRow(this)" id="updateButton">
+                      Update
+                    </button>
+                    <button onclick="deleteRow(this)" id="deleteButton">
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <div class="form-container" id="formContainer">
+        <form action="/add" id="editForm" class="form" method="POST">
+          <input type="hidden" id="employeeId" name="employeeId" />
+          <div class="column">
+            <div class="input-box">
+              <label>Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                name="first_name"
+                required
+              />
+            </div>
+            <div class="input-box">
+              <label>Mail id</label>
+              <input
+                type="email"
+                id="mail"
+                placeholder="Enter your email id"
+                name="email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="input-box">
+              <label>Phone Number</label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                pattern="^\d{10}$"
+                required
+                title="Please enter exactly 10 digits"
+                maxlength="10"
+                placeholder="Enter 10-digit phone number"
+              />
+            </div>
+            <div class="input-box">
+              <label>Designation</label>
+              <input
+                type="text"
+                id="designation"
+                name="designation"
+                placeholder="Enter Designation"
+                required
+              />
+            </div>
+          </div>
+          <div class="input-box address">
+            <div class="column">
+              <div class="input-box">
+                <label>Salary</label>
+                <input
+                  type="number"
+                  id="salary"
+                  name="salary"
+                  placeholder="Enter your Salary"
+                  required
+                />
+              </div>
+              <div class="input-box">
+                <label>Birth Date</label>
+                <input
+                  type="date"
+                  id="dob"
+                  name="dob"
+                  placeholder="Enter birth date"
+                  required
+                />
+              </div>
+            </div>
+            <div class="btns">
+              <button type="button" id="cancelButton">Cancel</button>
+              <button type="submit">Submit</button>
+              <button type="reset" id="resetButton">Reset</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
